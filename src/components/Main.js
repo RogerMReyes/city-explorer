@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import placeholder from '../imgs/USPlaceholder.jpg'
 
 class Main extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Main extends React.Component {
       locationName: 'Location:',
       locationLat: 0,
       locationLon: 0,
+      clickExplore: false,
       error: false,
       errorMessage: ''
     }
@@ -31,34 +33,54 @@ class Main extends React.Component {
       locationName: locationData.data[0].display_name,
       locationLat: locationData.data[0].lat,
       locationLon: locationData.data[0].lon,
+      clickExplore: true
     })
   }
 
 
   render() {
-    console.log(this.state);
     return (
       <>
-        <form onSubmit={this.handleExplore}>
-          <label className="search-box">
-            Enter where you want to go!
-            <input type="text" name="location" onInput={this.handleTypeUpdate} />
-          </label>
-          <button type="submit">Explore!</button>
+      <div >
+        <form onSubmit={this.handleExplore} className="search-box">
+            <input 
+              type="text" 
+              name="location" 
+              onInput={this.handleTypeUpdate} 
+              placeholder="Enter Location!"
+            />
+          <Button type="submit">Explore!</Button>
         </form>
-        <Card>
+      </div>
+        <Card
+          style={{
+            width: '50%',
+            height: '50%',
+            margin: '2em auto',
+            padding: '3em',
+            borderRadius: '5em',
+            backgroundColor: '#DEFFF2',
+            color: 'black'
+          }}
+        >
           <Card.Body>
             <Card.Title>
-              {this.state.locationName}
+              <h2>{this.state.locationName}</h2>
             </Card.Title>
             <Card.Text>
-              Lat: {this.state.locationLat}
+            <h2>Lat: {this.state.locationLat}</h2>
             </Card.Text>
             <Card.Text>
-              Lon: {this.state.locationLon}
+            <h2>Lon: {this.state.locationLon}</h2>
             </Card.Text>
           </Card.Body>
-          <Card.Img variant="bottom" src="" />
+          {
+            this.state.clickExplore
+            ?
+            <Card.Img variant="bottom" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.locationLat},${this.state.locationLon}&zoom=12`} />
+            :
+            <Card.Img variant="bottom" src={placeholder}/>
+          }
         </Card>
       </>
     );
