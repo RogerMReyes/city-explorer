@@ -20,7 +20,8 @@ class Main extends React.Component {
 
   handleTypeUpdate = e => {
     this.setState({
-      location: e.target.value
+      location: e.target.value,
+      error: false
     })
   }
 
