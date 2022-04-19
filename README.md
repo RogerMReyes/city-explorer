@@ -16,7 +16,7 @@ In order for another user to get this program running on their machine they must
 
 This application is utilizing axios, react-bootstrap, javascript, html5, and css3. Through the use of Event Listeners off the text input and explore button, information is pulled based of the string value inside the text box. Using the value we use the locationIQ API library to pull information regarding the given location. The information is then saved into state in order to be used for various tasks.
 
-![City Explorer Whiteboard](src/imgs/USPlaceholder.jpg)
+![City Explorer Whiteboard](src/imgs/Lab06Whiteboard.jpg)
 
 ## Change Log
 
