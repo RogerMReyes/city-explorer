@@ -53,6 +53,18 @@ Finish time: 6:35pm
 
 Actual time needed to complete: 10 min
 
+---
+
+Name of feature: #4 Forecast Component
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 6:00
+
+Finish time: 8:00pm
+
+Actual time needed to complete: 2 hours
+
 ## Credit and Collaborations
 
 Color Scheme Picker:

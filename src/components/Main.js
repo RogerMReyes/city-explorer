@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
-import placeholder from '../imgs/USPlaceholder.jpg'
+import Map from './Map'
+import Weather from './Weather'
+
 
 class Main extends React.Component {
   constructor(props) {
@@ -13,14 +14,19 @@ class Main extends React.Component {
       locationLat: 0,
       locationLon: 0,
       clickExplore: false,
-      error: false,
-      errorMessage: ''
+
+      weatherData: [],
+
+      mapError: false,
+      weatherError: false,
+      errorMessage: '',
+
     }
   }
 
-  handleTypeUpdate = e => {
+  handleTypeUpdate = value => {
     this.setState({
-      location: e.target.value,
+      location: value,
       error: false
     })
   }
@@ -28,10 +34,8 @@ class Main extends React.Component {
   handleExplore = async e => {
     e.preventDefault();
     try {
-
-
-      let apiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.location}&format=json`;
-      let locationData = await axios.get(apiUrl);
+      let locationApiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.location}&format=json`;
+      let locationData = await axios.get(locationApiUrl);
       this.setState({
         locationData: locationData.data[0],
         locationName: locationData.data[0].display_name,
@@ -41,8 +45,27 @@ class Main extends React.Component {
       });
     } catch (error) {
       this.setState({
-        error: true,
+        MapError: true,
         errorMessage: `An Error Occurred: ${error.response.status} Unable to geocode`
+      });
+    }
+  }
+
+  handleForecast = async e => {
+    e.preventDefault();
+    try {
+      let locationApiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.location}&format=json`;
+      let locationData = await axios.get(locationApiUrl);
+      let weatherApiUrl = `${process.env.REACT_APP_SERVER}/weather?location=${this.state.location}&lat=${locationData.data[0].lat}&lon=${locationData.data[0].lon}`;
+      let weatherData = await axios.get(weatherApiUrl);
+      this.setState({
+        weatherData: weatherData.data
+      })
+    }
+    catch (error) {
+      this.setState({
+        weatherError: true,
+        errorMessage: `An Error Occurred: ${error.response.status} Unable to pull information from server`
       });
     }
   }
@@ -51,55 +74,28 @@ class Main extends React.Component {
   render() {
     return (
       <>
-        <div >
-          <form onSubmit={this.handleExplore} className="search-box">
-            <input
-              type="text"
-              name="location"
-              onInput={this.handleTypeUpdate}
-              placeholder="Enter Location!"
-            />
-            <Button type="submit">Explore!</Button>
-          </form>
-        </div>
-        <Card
-          style={{
-            width: '50%',
-            height: '50%',
-            margin: '2em auto',
-            padding: '3em',
-            borderRadius: '5em',
-            backgroundColor: '#DEFFF2',
-            color: 'black'
-          }}
-        >
-          <Card.Body>
-            {
-              this.state.error
-                ?
-                <p>{this.state.errorMessage}</p>
-                :
-                <>
-                  <Card.Title>
-                    <h2>{this.state.locationName}</h2>
-                  </Card.Title>
-                  <Card.Text>
-                    <h2>Lat: {this.state.locationLat}</h2>
-                  </Card.Text>
-                  <Card.Text>
-                    <h2>Lon: {this.state.locationLon}</h2>
-                  </Card.Text>
-                </>
-            }
-          </Card.Body>
-          {
-            this.state.clickExplore
-              ?
-              <Card.Img variant="bottom" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.locationLat},${this.state.locationLon}&zoom=12`} />
-              :
-              <Card.Img variant="bottom" src={placeholder} />
-          }
-        </Card>
+        <Map
+          errorMessage={this.state.errorMessage}
+          MapError={this.state.error}
+          clickExplore={this.state.clickExplore}
+          locationName={this.state.locationName}
+          locationLat={this.state.locationLat}
+          locationLon={this.state.locationLon}
+          handleExplore={this.handleExplore}
+          handleTypeUpdate={this.handleTypeUpdate}
+          handleForecast={this.handleForecast}
+        />
+        {this.state.clickExplore
+        ?
+          <Weather
+          weatherData={this.state.weatherData}
+          clickExplore={this.state.clickExplore}
+          weatherError={this.state.weatherError}
+          errorMessage={this.state.errorMessage}
+          />
+          :
+          <></>
+        }
       </>
     );
   }
