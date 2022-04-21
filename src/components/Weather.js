@@ -5,7 +5,8 @@ class Weather extends React.Component {
   render() {
     return (
       <>
-        {
+        {this.props.weatherData.length
+        ?
           this.props.weatherError
             ?
             <ListGroup
@@ -29,8 +30,9 @@ class Weather extends React.Component {
             <ListGroup
               as="ol"
               style={{
-                width: '80%',
+                width: '50%',
                 minWidth: '40rem',
+                backgroundColor: '#DEFFF2',
                 margin: '0 auto'
               }}
             >
@@ -38,37 +40,23 @@ class Weather extends React.Component {
                 as="li"
                 className="d-flex justify-content-between align-items-start"
               >
-                <div className="ms-2 me-auto">
-                  {this.props.weatherData[0].description}
+                <div 
+                  style={{
+                    lineHeight: '1'
+                  }}
+                >
+                  <p>Current Weather: {this.props.weatherData[0].description}</p>
+                  <p>Temperature: {this.props.weatherData[0].temp} <span>&#8457;</span></p>
+
                 </div>
                 <Badge bg="primary" pill>
                   {this.props.weatherData[0].date}
                 </Badge>
               </ListGroup.Item>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  {this.props.weatherData[1].description}
-                </div>
-                <Badge bg="primary" pill>
-                  {this.props.weatherData[1].date}
-                </Badge>
-              </ListGroup.Item>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  {this.props.weatherData[2].description}
-                </div>
-                <Badge bg="primary" pill>
-                  {this.props.weatherData[2].date}
-                </Badge>
-              </ListGroup.Item>
             </ListGroup>
-        }
+          :
+          <></>
+          }
       </>
     )
   }
