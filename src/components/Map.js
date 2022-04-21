@@ -15,8 +15,9 @@ class Map extends React.Component {
   }
 
   exploreClicked = (e) => {
-    this.props.handleForecast(e);
     this.props.handleExplore(e);
+    this.props.handleForecast(e);
+    this.props.handleMovies(e);
   }
 
   render() {
@@ -49,7 +50,7 @@ class Map extends React.Component {
             {
               this.props.mapError
                 ?
-                <p>{this.props.errorMessage}</p>
+                <Card.Title>{this.props.errorMessage}</Card.Title>
                 :
                 <>
                   <Card.Title>

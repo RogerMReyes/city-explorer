@@ -18,6 +18,8 @@ This application is utilizing axios, react-bootstrap, javascript, html5, and css
 
 ![City Explorer Whiteboard](src/imgs/Lab06Whiteboard.jpg)
 ![City Explorer Whiteboard](src/imgs/Lab07Whiteboard.jpg)
+![City Explorer Whiteboard](src/imgs/Lab08Whiteboard.jpg)
+
 
 ## Change Log
 
@@ -65,6 +67,31 @@ Start time: 6:00
 Finish time: 8:00pm
 
 Actual time needed to complete: 2 hours
+
+---
+
+Name of feature: #5 Switch to weather API
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 6:30pm
+
+Finish time: 8:00pm
+
+Actual time needed to complete: 1 hour 30 min
+
+---
+
+Name of feature: #6 Movie Component and API
+
+Estimate of time needed to complete: 1 hour 30 min
+
+Start time: 8:16pm
+
+Finish time: 9:10pm
+
+Actual time needed to complete: 54 min
+
 
 ## Credit and Collaborations
 
