@@ -39,7 +39,7 @@ class Movies extends React.Component {
                   width: '75%',
                   minWidth: '40rem',
                   backgroundColor: '#DEFFF2',
-                  margin: '1em auto'
+                  margin: '1em auto 5em auto'
                 }}
               >
                 {this.props.movieData.map((data, id) => {
@@ -58,7 +58,17 @@ class Movies extends React.Component {
                             {data.popularity}
                           </Badge>
                           </Accordion.Header>
-                        <Accordion.Body style={{ color: 'black'}}>{data.overview}</Accordion.Body>
+                        <Accordion.Body
+                         style={{ 
+                           color: 'black',
+                           display: 'flex',
+                           alignItems: 'center',
+                           fontSize: '1.3em'
+                          }}
+                         >
+                            <img src={`https://image.tmdb.org/t/p/w200${data.posterPath}`} alt={data.title} style={{marginRight: '2em'}}/>
+                            {data.overview}
+                        </Accordion.Body>
                       </Accordion.Item>
                     </div>
                   )
