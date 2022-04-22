@@ -1,5 +1,7 @@
 import React from "react";
-import { Badge, ListGroup, Container, Row, Col } from "react-bootstrap";
+import {  Container, Row  } from "react-bootstrap";
+import WeatherDay from "./WeatherDay";
+import Error from "./Error";
 
 
 class Weather extends React.Component {
@@ -10,25 +12,10 @@ class Weather extends React.Component {
           ?
           this.props.weatherError
             ?
-            <ListGroup
-              as="ol"
-              style={{
-                width: '80%',
-                minWidth: '40rem',
-                margin: '0 auto'
-              }}
-            >
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  {this.props.errorMessage}
-                </div>
-              </ListGroup.Item>
-            </ListGroup>
+            <Error
+            errorMessage={this.props.errorMessage}
+          />
             :
-
             <Container
               style={{
                 width: '75%',
@@ -43,29 +30,12 @@ class Weather extends React.Component {
               <Row>
                 {this.props.weatherData.map((data, id) => {
                   return (
-                    <Col
-                      className="d-flex justify-content-between align-items-start"
+                    <WeatherDay
+                      description={data.description}
+                      temp={data.temp}
+                      date={data.date}
                       key={id}
-                      style={{
-                        margin: '2px',
-                        padding: '5px',
-                        border: '2px solid black'
-
-                      }}
-                    >
-                      <div
-                        style={{
-                          lineHeight: '1'
-                        }}
-                      >
-                        <p>{data.description}</p>
-                        <p>Temperature: {data.temp} 
-                        <span>&#8457;</span></p>
-                      </div>
-                      <Badge bg="primary" pill>
-                        {data.date}
-                      </Badge>
-                    </Col>
+                    />
                   )
                 })}
               </Row>
