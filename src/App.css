@@ -10,6 +10,10 @@ h1{
   text-align: center;
 }
 
+h2{
+  text-align: center;
+}
+
 .search-box{
   width: max-content;
   height: max-content;
@@ -27,3 +31,4 @@ h1{
 .card-text{
   font-size: 1.5em;
 }
+
