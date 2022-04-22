@@ -15,15 +15,12 @@ class Main extends React.Component {
       locationLat: 0,
       locationLon: 0,
       clickExplore: false,
-
       weatherData: [],
       movieData: [],
-
       mapError: false,
       weatherError: false,
       movieError: false,
       errorMessage: '',
-
     }
   }
 
@@ -37,61 +34,50 @@ class Main extends React.Component {
     })
   }
 
-  handleExplore = async e => {
+
+  handleExplore = e => {
     e.preventDefault();
-    try {
-      let locationApiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.location}&format=json`;
-      let locationData = await axios.get(locationApiUrl);
-      this.setState({
+    let locationApiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.location}&format=json`;
+    axios.get(locationApiUrl)
+      .then(locationData => this.setState({
         locationData: locationData.data[0],
         locationName: locationData.data[0].display_name,
         locationLat: locationData.data[0].lat,
         locationLon: locationData.data[0].lon,
         clickExplore: true
-      });
-    }
-    catch (error) {
-      this.setState({
-        MapError: true,
-        errorMessage: `An Error Occurred: ${error.response.status} Unable to geocode`
-      });
-    }
-  }
-
-  handleForecast = async e => {
-    e.preventDefault();
-    try {
-      let locationApiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.location}&format=json`;
-      let locationData = await axios.get(locationApiUrl);
-      let weatherApiUrl = `${process.env.REACT_APP_SERVER}/weather?&lat=${locationData.data[0].lat}&lon=${locationData.data[0].lon}`;
-      let weatherData = await axios.get(weatherApiUrl);
-      this.setState({
-        weatherData: weatherData.data
-      })
-    }
-    catch (error) {
-      this.setState({
+      }))
+      .catch(err => this.setState({
         weatherError: true,
-        errorMessage: `An Error Occurred: ${error.response.status} Unable to pull information from server`
-      });
-    }
+        errorMessage: `An Error Occurred: ${err.response.status} Unable to pull information from server`
+      }))
   }
 
-  handleMovies = async e => {
+
+  handleForecast = (e) => {
     e.preventDefault();
-    try {
-      let movieApiUrl = `${process.env.REACT_APP_SERVER}/movies?locationName=${this.state.location}`;
-      let movieData = await axios.get(movieApiUrl);
-      this.setState({
+    let locationApiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.location}&format=json`;
+    axios.get(locationApiUrl)
+      .then(weatherInformation => `${process.env.REACT_APP_SERVER}/weather?&lat=${weatherInformation.data[0].lat}&lon=${weatherInformation.data[0].lon}`)
+      .then(weatherApiUrl => axios.get(weatherApiUrl))
+      .then(weatherData => this.setState({ weatherData: weatherData.data }))
+      .catch(err => this.setState({
+        weatherError: true,
+        errorMessage: `An Error Occurred: ${err.response.status} Unable to pull information from server`
+      }))
+  }
+
+  handleMovies = (e) => {
+    e.preventDefault();
+    let movieApiUrl = `${process.env.REACT_APP_SERVER}/movies?locationName=${this.state.location}`;
+    axios.get(movieApiUrl)
+      .then(movieData => this.setState({
         movieData: movieData.data
       })
-    }
-    catch (error) {
-      this.setState({
-        moveError: true,
-        errorMessage: `An Error Occurred: ${error.response.status} Unable to pull information from server`
-      });
-    }
+      )
+      .catch(err => this.setState({
+        weatherError: true,
+        errorMessage: `An Error Occurred: ${err.response.status} Unable to pull information from server`
+      }))
   }
 
   render() {
