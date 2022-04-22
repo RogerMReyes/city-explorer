@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: Roger Reyes
-**Version**: 1.0.0 
+**Version**: 1.1.0
 <!-- increment the patch/fix version number if you make more commits past your first submission -->
 
 ## Overview
@@ -19,6 +19,7 @@ This application is utilizing axios, react-bootstrap, javascript, html5, and css
 ![City Explorer Whiteboard](src/imgs/Lab06Whiteboard.jpg)
 ![City Explorer Whiteboard](src/imgs/Lab07Whiteboard.jpg)
 ![City Explorer Whiteboard](src/imgs/Lab08Whiteboard.jpg)
+![City Explorer Whiteboard](src/imgs/Lab09Whiteboard.jpg)
 
 
 ## Change Log
@@ -92,6 +93,29 @@ Finish time: 9:10pm
 
 Actual time needed to complete: 54 min
 
+---
+
+Name of feature: #7 WeatherDay and Movie Component
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 4:28pm
+
+Finish time: 5:34pm
+
+Actual time needed to complete: 1 hour 6 min
+
+---
+
+Name of feature: #8 Refactor
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 5:50pm
+
+Finish time: 7:20pm
+
+Actual time needed to complete: 1 hour 30 min
 
 ## Credit and Collaborations
 
