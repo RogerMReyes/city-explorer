@@ -18,6 +18,7 @@ class Map extends React.Component {
     this.props.handleExplore(e);
     this.props.handleForecast(e);
     this.props.handleMovies(e);
+    this.props.handleYelp(e);
   }
 
   render() {

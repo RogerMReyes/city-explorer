@@ -20,6 +20,8 @@ This application is utilizing axios, react-bootstrap, javascript, html5, and css
 ![City Explorer Whiteboard](src/imgs/Lab07Whiteboard.jpg)
 ![City Explorer Whiteboard](src/imgs/Lab08Whiteboard.jpg)
 ![City Explorer Whiteboard](src/imgs/Lab09Whiteboard.jpg)
+![City Explorer Whiteboard](src/imgs/Lab10Whiteboard.jpg)
+
 
 
 ## Change Log
@@ -116,6 +118,30 @@ Start time: 5:50pm
 Finish time: 7:20pm
 
 Actual time needed to complete: 1 hour 30 min
+
+---
+
+Name of feature: #9 Added timestamp for last API request
+
+Estimate of time needed to complete: 1 hours
+
+Start time: 4:45pm
+
+Finish time: 6:00pm
+
+Actual time needed to complete: 1 hour 15 min
+
+---
+
+Name of feature: #9 Add Yelp Component
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 7:20pm
+
+Finish time: unfinished
+
+Actual time needed to complete: unfinished
 
 ## Credit and Collaborations
 
