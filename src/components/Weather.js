@@ -2,6 +2,7 @@ import React from "react";
 import {  Container, Row  } from "react-bootstrap";
 import WeatherDay from "./WeatherDay";
 import Error from "./Error";
+import moment from "moment";
 
 
 class Weather extends React.Component {
@@ -26,7 +27,8 @@ class Weather extends React.Component {
                 color: 'black',
               }}
             >
-              <h2>16 Day Weather Forecast</h2>
+              <h2>5 Day Weather Forecast</h2>
+              <h3>Last Updated {moment(this.props.weatherData[0].timestamp).format('MMMM Do YYYY, h:mm:ss a')}</h3>
               <Row>
                 {this.props.weatherData.map((data, id) => {
                   return (

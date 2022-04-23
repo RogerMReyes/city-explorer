@@ -3,6 +3,7 @@ import axios from "axios";
 import Map from './Map'
 import Weather from './Weather'
 import Movies from "./Movies";
+import Yelp from "./Yelp";
 
 
 class Main extends React.Component {
@@ -17,9 +18,11 @@ class Main extends React.Component {
       clickExplore: false,
       weatherData: [],
       movieData: [],
+      yelpData: [],
       mapError: false,
       weatherError: false,
       movieError: false,
+      yelpError: false,
       errorMessage: '',
     }
   }
@@ -80,6 +83,22 @@ class Main extends React.Component {
       }))
   }
 
+  handleYelp = (e) => {
+    e.preventDefault();
+    console.log('lat: ', this.state.locationLat)
+      let yelpApiUrl = `${process.env.REACT_APP_SERVER}/yelp?&lat=${this.state.locationLat}&lon=${this.state.locationLon}`
+      axios.get(yelpApiUrl)
+      .then(yelpData => {
+        this.setState({ yelpData: yelpData.data })
+        console.log('here');
+      })
+
+      .catch(err => this.setState({
+        yelpError: true,
+        errorMessage: `An Error Occurred: ${err.response.status} Unable to pull information from server`
+      }))
+  }
+
   render() {
     return (
       <>
@@ -94,6 +113,7 @@ class Main extends React.Component {
           handleTypeUpdate={this.handleTypeUpdate}
           handleForecast={this.handleForecast}
           handleMovies={this.handleMovies}
+          handleYelp={this.handleYelp}
         />
         {this.state.clickExplore
           ?
@@ -112,6 +132,17 @@ class Main extends React.Component {
             movieData={this.state.movieData}
             clickExplore={this.state.clickExplore}
             movieError={this.state.weatherError}
+            errorMessage={this.state.errorMessage}
+          />
+          :
+          <></>
+        }
+        {this.state.clickExplore
+          ?
+          <Yelp
+            yelpData={this.state.yelpData}
+            clickExplore={this.state.clickExplore}
+            yelpError={this.state.yelpError}
             errorMessage={this.state.errorMessage}
           />
           :
